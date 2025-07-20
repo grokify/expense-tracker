@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Menu, X, PlusCircle, BarChart3, List, Home } from 'lucide-react';
+import { Menu, X, PlusCircle, BarChart3, List, Home, Cloud } from 'lucide-react';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -18,6 +18,7 @@ const Navigation = () => {
     { href: '/expenses', label: 'Expenses', icon: List },
     { href: '/add', label: 'Add Expense', icon: PlusCircle },
     { href: '/analytics', label: 'Analytics', icon: BarChart3 },
+    { href: '/cloud-export', label: 'Cloud Export', icon: Cloud },
   ];
 
   const isActiveRoute = (href: string) => {
