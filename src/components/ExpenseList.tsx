@@ -9,7 +9,7 @@ interface ExpenseListProps {
   expenses: Expense[];
   onEdit?: (expense: Expense) => void;
   onDelete?: (expenseId: string) => void;
-  onExport?: (expenses: Expense[]) => void;
+  onExport?: () => void;
 }
 
 export default function ExpenseList({ expenses, onEdit, onDelete, onExport }: ExpenseListProps) {
@@ -71,9 +71,9 @@ export default function ExpenseList({ expenses, onEdit, onDelete, onExport }: Ex
               <Filter className="w-4 h-4" />
               <span>Filters</span>
             </button>
-            {onExport && filteredExpenses.length > 0 && (
+            {onExport && expenses.length > 0 && (
               <button
-                onClick={() => onExport(filteredExpenses)}
+                onClick={onExport}
                 className="px-3 py-2 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 flex items-center space-x-2"
               >
                 <Download className="w-4 h-4" />

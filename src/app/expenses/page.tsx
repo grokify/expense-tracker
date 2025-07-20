@@ -4,9 +4,9 @@ import { useState, useEffect } from 'react';
 import Layout from '@/components/Layout';
 import ExpenseList from '@/components/ExpenseList';
 import ExpenseForm from '@/components/ExpenseForm';
+import ExportModal from '@/components/ExportModal';
 import { Expense } from '@/types/expense';
 import { storageUtils } from '@/utils/storage';
-import { downloadCSV } from '@/utils/expense';
 import { Plus, X } from 'lucide-react';
 
 export default function ExpensesPage() {
@@ -14,6 +14,7 @@ export default function ExpensesPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [editingExpense, setEditingExpense] = useState<Expense | null>(null);
   const [showForm, setShowForm] = useState(false);
+  const [showExportModal, setShowExportModal] = useState(false);
 
   useEffect(() => {
     loadExpenses();
@@ -48,8 +49,8 @@ export default function ExpensesPage() {
     setEditingExpense(null);
   };
 
-  const handleExport = (expensesToExport: Expense[]) => {
-    downloadCSV(expensesToExport);
+  const handleExport = () => {
+    setShowExportModal(true);
   };
 
   if (isLoading) {
@@ -108,6 +109,12 @@ export default function ExpensesPage() {
           onEdit={handleEdit}
           onDelete={handleDelete}
           onExport={handleExport}
+        />
+
+        <ExportModal
+          isOpen={showExportModal}
+          onClose={() => setShowExportModal(false)}
+          expenses={expenses}
         />
       </div>
     </Layout>
